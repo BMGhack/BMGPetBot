@@ -99,3 +99,10 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Project specific
+config.py
+lambda_deploy/venv_petbot
+lambda_deploy/venv_petbot/*.*
+PetBot.zip
+
