@@ -8,19 +8,23 @@ Mostly I 'stole' scripts from there which deal with setting up and deploying you
 
 Steps:
 
-Set up the aws command line tool. https://aws.amazon.com/cli/
+* Set up the aws command line tool. https://aws.amazon.com/cli/
+* Get all your AWS stuff configured (Keys, secrets, etc). See: http://boto3.readthedocs.io/en/latest/guide/configuration.html
+* Set up the virtual environment.
+* Create a role that will be used to deploy this:
 
-Get all your AWS stuff configured (Keys, secrets, etc). See: http://boto3.readthedocs.io/en/latest/guide/configuration.html
-
-Set up the virtual environment.
-
-Create a role that will be used to deploy this.
 python iamstuff.py
 
-Zip up your code (including necessary stuff from the virtualenv).
+* Zip up your code (including necessary stuff from the virtualenv):
+
 . zip_for_lambda.sh
 
-Deploy.
+* Deploy!
+
 python simple_lambda_create.py
 
-Schedule the job to run hourly (or other cycle).
+* Schedule the job to run hourly (or other cycle).
+
+You can also update a deployment:
+
+python simple_lambda_update.py
