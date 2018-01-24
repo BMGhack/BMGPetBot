@@ -4,7 +4,7 @@ This is slightly tricky. A good outline can be found here: https://codeburst.io/
 
 Another good resource: https://github.com/agentreno/lambda-packaging-example
 
-Mostly I 'stole' scripts from there which deal with setting up and deploying your lambda function.
+Adapted scripts from there which deal with setting up and deploying your lambda function.
 
 Steps:
 
