@@ -60,11 +60,15 @@ def get_city_website_pet(pick_random = False):
 	nodes = soup.find_all("div",{"id":"intro"})
 	animule_text = nodes[0].text.split('Apply')[0].strip()
 	splitty = name_re.split(animule_text)
-	print(splitty)
+	#add tags
+	lines = splitty[-1].split("\n")
+	tags = ["#%s" % lines[1], "#adoptdontshop", "#rescue", "#adoptme", "#shelterpets"]
 	if len(splitty) != 1:
 		animule_text = ("%s is: %s" % (splitty[-2], splitty[-1]))
+     
 	animule_text = '\n'.join(animule_text.split("\n")[:6])
 	animule_text = animule_text.replace("Adoption Fee Waived","Adoption Fee Waived.")
+	animule_text = animule_text + "\n" + " ".join(tags)
 # trim if too long!
 	animule_text = animule_text[:280]
 
