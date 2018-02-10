@@ -32,7 +32,7 @@ def tweet(api, message, pet_pic_url):
         img_file = get_image_blob(pet_pic_url)
         api.update_with_media(filename, status=message, file=img_file, lat=LATITUDE, long=LONGITUDE)
     else:
-        api.update(status=message)
+        api.update_status(status=message, lat=LATITUDE, long=LONGITUDE)
 
 def get_image_blob(url):
     response = requests.get(url)
