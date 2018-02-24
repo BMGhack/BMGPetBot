@@ -12,7 +12,6 @@ import requests
 import tweepy
 import json
 import os
-from random import randrange
 from bs4 import BeautifulSoup
 import requests
 import random
@@ -59,8 +58,8 @@ def get_city_website_pet(pick_random = False):
 	#intro
 	nodes = soup.find_all("div",{"id":"intro"})
 	paras = nodes[0].find_all('p')
-	name = paras[-1].text
-	li = nodes[0].find_all('li')
+	name = paras[0].text
+	li = nodes[0].find_all('td')
 	lines = [x.text for x in li][:-1]
 	animule_text = name + "\n" + "\n".join(lines)
 # trim if too long!
@@ -122,7 +121,7 @@ def get_petfinder_pet(location, count=25, pick_random = False):
 			raise Exception('Unexpected error: %s' % status_message)
 
 	if pick_random:
-		index = randrange(len(d["petfinder"]["pets"]["pet"]))
+		index = random.randrange(len(d["petfinder"]["pets"]["pet"]))
 		pet = d["petfinder"]["pets"]["pet"][index]
 	else:
 		pet = d["petfinder"]["pets"]["pet"][0]
