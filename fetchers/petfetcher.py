@@ -58,7 +58,9 @@ def get_city_website_pet(pick_random = False):
 	#intro
 	nodes = soup.find_all("div",{"id":"intro"})
 	paras = nodes[0].find_all('p')
-	name = paras[0].text
+	# actually split on line, get last line
+	name = paras[-1].text
+
 	li = nodes[0].find_all('td')
 	lines = [x.text for x in li][:-1]
 	animule_text = name + "\n" + "\n".join(lines)
