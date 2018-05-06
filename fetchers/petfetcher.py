@@ -5,6 +5,7 @@ Petfinder API: https://www.petfinder.com/developers/api-docs
 10/26/2017 SDC Initial
 1/4/2018 SDC minor restructuring plus 'pet randomization'
 1/5/2018 SDC pull from Bloomington website
+5/6/2018 SDC still going? fixes #8 for tweet formattin!
 """
 
 from config import *
@@ -19,6 +20,9 @@ import re
 
 name_re = re.compile('\.w?(.*?)is:');
 CITY_SITE_BASE = 'https://bloomington.in.gov'
+
+
+CITY_LEAD_INS = ['Adopt', 'Stop in and meet', "Hi, I'm"]
 
 PETFINDER_URL = "http://api.petfinder.com/"
 PETFINDER_ADJECTIVES = {
@@ -35,6 +39,19 @@ PETFINDER_ADJECTIVES = {
 
 """
 City site stuff
+
+Pretty Girl is:
+Cat
+Domestic Short Hair
+Female
+8 years 4 months.
+Very Large
+
+New format
+Adopt Snowball, a very large American female rabbit, age 6 years 1 month! #rabbit [etc]
+Adopt [Name], a [size] [Breed] [sex] [species], age [age]! #[species] [etc]
+
+
 """
 def get_city_website_pet(pick_random = False):
 	request = requests.get('%s/animal-shelter/animals' % CITY_SITE_BASE)
@@ -62,8 +79,20 @@ def get_city_website_pet(pick_random = False):
 	name = paras[-1].text
 
 	li = nodes[0].find_all('td')
+
+
+
 	lines = [x.text for x in li][:-1]
-	animule_text = name + "\n" + "\n".join(lines)
+	name = name[:-4]
+
+	animule_text = "%s %s, a %s %s %s %s. Age %s!" % (CITY_LEAD_INS[random.randrange(len(CITY_LEAD_INS))],
+			name,
+			lines[4].lower(),
+			lines[1],
+			lines[2],
+			lines[0],
+			lines[3][:-1])
+	#animule_text = name + "\n" + "\n".join(lines)
 # trim if too long!
 
 	tags = ["#%s" % lines[0], "#adoptdontshop", "#rescue", "#adoptme", "#shelterpets"]
