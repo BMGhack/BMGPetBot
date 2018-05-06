@@ -80,8 +80,6 @@ def get_city_website_pet(pick_random = False):
 
 	li = nodes[0].find_all('td')
 
-
-
 	lines = [x.text for x in li][:-1]
 	name = name[:-4]
 
