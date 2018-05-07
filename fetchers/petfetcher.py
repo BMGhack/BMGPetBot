@@ -68,6 +68,9 @@ def get_city_website_pet(pick_random = False):
 	try:
 		img = node.img['src']
 		img = '%s%s' % (CITY_SITE_BASE, img)
+		# website change their default image, tweepy DOES NOT LIKE SVGs
+		if img.find(".svg") >= 0:
+			img = None
 	except:
 		print("No image found")
 	r = requests.get('%s/%s' % (CITY_SITE_BASE, url))
